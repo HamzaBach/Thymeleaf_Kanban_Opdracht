@@ -9,10 +9,10 @@ public class Task {
     @GeneratedValue
             (strategy = GenerationType.IDENTITY)
     private Long taskId;
-    private String name;
-    private String description;
+    private String name="New task";
+    private String description="Add task description";
     private String assignedTo;
-    private taskStatus status;
+    private taskStatus status=taskStatus.ToDo;
     private int activeTask=1;
 
     public Task(String name, String description,String assignedTo,
@@ -24,6 +24,10 @@ public class Task {
         this.activeTask = activeTask;
     }
     public Task(){
+    }
+
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 
     public Long getTaskId() {

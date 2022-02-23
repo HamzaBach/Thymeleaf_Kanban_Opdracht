@@ -46,4 +46,16 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @PostMapping("/moveTaskForward/{taskId}")
+    public String moveTaskForward(@PathVariable("taskId") Long taskId){
+        this.taskService.moveTaskForward(taskId);
+        return "redirect:/tasks";
+    }
+    @PostMapping("/moveTaskBackward/{taskId}")
+    public String moveTaskBackward(@PathVariable("taskId") Long taskId){
+        this.taskService.moveTaskBackward(taskId);
+        return "redirect:/tasks";
+    }
+
+
 }
