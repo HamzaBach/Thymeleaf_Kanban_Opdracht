@@ -70,5 +70,11 @@ public class TaskService {
         }
     }
 
+    public void deleteTask(Long id){
+        Task task = taskRepository.findById(id).get();
+        task.setActiveTask(0);
+        taskRepository.save(task);
+    }
+
 
 }

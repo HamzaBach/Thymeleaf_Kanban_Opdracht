@@ -44,7 +44,7 @@ public class TaskController {
     }
 
     @PostMapping("/saveTask")
-    public String saveArticle(@ModelAttribute("task") Task task){
+    public String saveTask(@ModelAttribute("task") Task task){
         this.taskService.saveTask(task);
         return "redirect:/tasks";
     }
@@ -57,6 +57,12 @@ public class TaskController {
     @PostMapping("/moveTaskBackward/{taskId}")
     public String moveTaskBackward(@PathVariable("taskId") Long taskId){
         this.taskService.moveTaskBackward(taskId);
+        return "redirect:/tasks";
+    }
+
+    @PostMapping("/deleteTask/{taskId}")
+    public String deleteTask(@PathVariable("taskId") Long taskId){
+        this.taskService.deleteTask(taskId);
         return "redirect:/tasks";
     }
 
