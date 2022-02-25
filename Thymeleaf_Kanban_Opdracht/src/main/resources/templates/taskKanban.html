@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Thymeleaf kanban opdracht Hamza Bachiri</title>
-
     <!-- Bootstrap CSS & icons-->
     <div th:include="fragments/fragments::bootstrapCssAndIcons"/>
     <!-- Background gradient-->
     <style th:include="fragments/fragments::backgroundGradient"/>
 </head>
 <body>
-<div class="row">
+<div class="row text-center">
     <h1>Kanban opdracht in Thymeleaf & Spring boot (Hamza Bachiri)</h1>
 </div>
 <section>
     <div class="container p-0">
-
-        <h1 class="h3 mb-3">Kanban Board</h1>
-
         <div class="row">
             <div class="col-12 col-lg-6 col-xl-3">
                 <div class="card card-border">
@@ -38,40 +34,7 @@
                                         <p th:text="${task.assignedTo}"></p>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskBackward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-left"></i></a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a th:href="@{'/editTask/' + ${task.taskId}}"
-                                           class="btn btn-outline-info btn-sm">
-                                            <i class="bi bi-pencil-fill"></i></a> Edit</a>
-                                    </div>
-<!--                                    <div class="col-4" >-->
-<!--                                        <form th:action="@{'/moveTaskForward/' + ${task.taskId}}"-->
-<!--                                              th:object="${task}"  method="POST">-->
-<!--                                            <input type="hidden" th:field="*{taskId}" th:value="${task.taskId}" class="form-control"/>-->
-<!--                                            <input type="hidden" th:field="*{name}" th:value="${task.name}" class="form-control"/>-->
-<!--                                            <input type="hidden" th:field="*{description}" th:value="${task.description}" class="form-control"/>-->
-<!--                                            <input type="hidden" th:field="*{assignedTo}" th:value="${task.assignedTo}" class="form-control"/>-->
-<!--                                            <input type="hidden" th:field="*{status}" th:value="${task.status}" class="form-control"/>-->
-<!--                                            <input type="hidden" th:field="*{activeTask}" th:value="${task.activeTask}" class="form-control"/>-->
-<!--                                            <div >-->
-<!--                                                <button type="submit" class="btn btn-outline-warning btn-sm" >-->
-<!--                                                    <i class="bi bi-arrow-right"></i></button>-->
-<!--                                            </div>-->
-<!--                                        </form>-->
-<!--                                    </div>-->
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskForward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-right"></i></a>
-                                    </div>
-
-                                </div>
+                                <div th:include="fragments/fragments::movingToDoTasks"/>
                             </div>
                         </div>
                     </div>
@@ -95,24 +58,7 @@
                                         <p th:text="${task.assignedTo}"></p>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskBackward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-left"></i></a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a th:href="@{'/editTask/' + ${task.taskId}}"
-                                           class="btn btn-outline-info btn-sm">
-                                            <i class="bi bi-pencil-fill"></i></a> Edit</a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskForward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-right"></i></a>
-                                    </div>
-                                </div>
+                                <div th:include="fragments/fragments::movingInProgressOrOnHoldTasks"/>
                             </div>
                         </div>
                     </div>
@@ -121,7 +67,6 @@
             <div class="col-12 col-lg-6 col-xl-3">
                 <div class="card card-border">
                     <div class="card-header">
-
                         <h5 class="card-title">On hold</h5>
                         <h6 class="card-subtitle text-muted">Overview of on hold tasks</h6>
                     </div>
@@ -137,24 +82,7 @@
                                         <p th:text="${task.assignedTo}"></p>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskBackward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-left"></i></a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a th:href="@{'/editTask/' + ${task.taskId}}"
-                                           class="btn btn-outline-info btn-sm">
-                                            <i class="bi bi-pencil-fill"></i></a> Edit</a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskForward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-right"></i></a>
-                                    </div>
-                                </div>
+                                <div th:include="fragments/fragments::movingInProgressOrOnHoldTasks"/>
                             </div>
                         </div>
                     </div>
@@ -178,31 +106,13 @@
                                         <p th:text="${task.assignedTo}"></p>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskBackward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-left"></i></a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a th:href="@{'/editTask/' + ${task.taskId}}"
-                                           class="btn btn-outline-info btn-sm">
-                                            <i class="bi bi-pencil-fill"></i></a> Edit</a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a th:href="@{'/moveTaskForward/' + ${task.taskId}}"
-                                           class="btn btn-outline-warning btn-sm" method="POST">
-                                            <i class="bi bi-arrow-right"></i></a>
-                                    </div>
-                                </div>
+                                <div th:include="fragments/fragments::movingCompletedTasks"/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     </div>
 </section>

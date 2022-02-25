@@ -23,6 +23,82 @@
 </head>
 <body>
 
+<div th:fragment="movingToDoTasks">
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+      <a th:href="@{'/editTask/' + ${task.taskId}}"
+         class="btn btn-outline-info btn-sm">
+        <i class="bi bi-pencil-fill"></i></a> Edit</a>
+    </div>
+    <div class="col-4" >
+      <form th:action="@{'/moveTaskForward/' + ${task.taskId}}"
+            th:object="${task}"  method="POST">
+        <input type="hidden" th:value="${task.status}" class="form-control"/>
+        <div >
+          <button type="submit" class="btn btn-outline-warning btn-sm" >
+            <i class="bi bi-arrow-right"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="movingInProgressOrOnHoldTasks">
+  <div class="row">
+    <div class="col-4">
+      <form th:action="@{'/moveTaskBackward/' + ${task.taskId}}"
+            th:object="${task}"  method="POST">
+        <input type="hidden" th:value="${task.status}" class="form-control"/>
+        <div >
+          <button type="submit" class="btn btn-outline-warning btn-sm" >
+            <i class="bi bi-arrow-left"></i></button>
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+      <a th:href="@{'/editTask/' + ${task.taskId}}"
+         class="btn btn-outline-info btn-sm">
+        <i class="bi bi-pencil-fill"></i></a> Edit</a>
+    </div>
+    <div class="col-4" >
+      <form th:action="@{'/moveTaskForward/' + ${task.taskId}}"
+            th:object="${task}"  method="POST">
+        <input type="hidden" th:value="${task.status}" class="form-control"/>
+        <div >
+          <button type="submit" class="btn btn-outline-warning btn-sm" >
+            <i class="bi bi-arrow-right"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="movingCompletedTasks">
+  <div class="row">
+    <div class="col-4">
+      <form th:action="@{'/moveTaskBackward/' + ${task.taskId}}"
+            th:object="${task}"  method="POST">
+        <input type="hidden" th:value="${task.status}" class="form-control"/>
+        <div >
+          <button type="submit" class="btn btn-outline-warning btn-sm" >
+            <i class="bi bi-arrow-left"></i></button>
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+      <a th:href="@{'/editTask/' + ${task.taskId}}"
+         class="btn btn-outline-info btn-sm">
+        <i class="bi bi-pencil-fill"></i></a> Edit</a>
+    </div>
+    <div class="col-4" >
+    </div>
+  </div>
+
+</div>
+
+
 
 <div th:fragment="Jquery">
   <!-- Optional JavaScript -->
