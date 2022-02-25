@@ -23,7 +23,10 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String getActiveTasks(Model model) {
-        model.addAttribute("tasksList", taskService.getActiveTasks());
+        model.addAttribute("tasksToDoList", taskService.getToDoTasks());
+        model.addAttribute("tasksInProgressList", taskService.getInProgressTasks());
+        model.addAttribute("tasksOnHoldList", taskService.getOnHoldTasks());
+        model.addAttribute("tasksCompletedList", taskService.getCompletedTasks());
         return "taskKanban";
     }
 

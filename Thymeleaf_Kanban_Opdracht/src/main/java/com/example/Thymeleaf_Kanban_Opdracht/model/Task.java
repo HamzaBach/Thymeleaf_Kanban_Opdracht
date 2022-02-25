@@ -12,11 +12,11 @@ public class Task {
     private String name="New task";
     private String description="Add task description";
     private String assignedTo;
-    private taskStatus status=taskStatus.ToDo;
+    private int status=0;
     private int activeTask=1;
 
     public Task(String name, String description,String assignedTo,
-                taskStatus status, int activeTask) {
+                int status, int activeTask) {
         this.name = name;
         this.description = description;
         this.assignedTo=assignedTo;
@@ -59,11 +59,11 @@ public class Task {
         this.description = description;
     }
 
-    public taskStatus getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(taskStatus status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

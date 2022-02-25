@@ -1,7 +1,6 @@
 package com.example.Thymeleaf_Kanban_Opdracht.service;
 
 import com.example.Thymeleaf_Kanban_Opdracht.model.Task;
-import com.example.Thymeleaf_Kanban_Opdracht.model.taskStatus;
 import com.example.Thymeleaf_Kanban_Opdracht.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,22 @@ public class TaskService {
     public List<Task> getActiveTasks(){
         return this.taskRepository.findByActiveTask(1);
     }
+
     public Optional<Task> findById(Long id){
         return taskRepository.findById(id);
+    }
+
+    public List<Task> getToDoTasks(){
+        return taskRepository.findByActiveTaskAndStatus(1,0);
+    }
+    public List<Task> getInProgressTasks(){
+        return taskRepository.findByActiveTaskAndStatus(1,1);
+    }
+    public List<Task> getOnHoldTasks(){
+        return taskRepository.findByActiveTaskAndStatus(1,2);
+    }
+    public List<Task> getCompletedTasks(){
+        return taskRepository.findByActiveTaskAndStatus(1,3);
     }
 
     public void saveTask(Task task){
@@ -31,28 +44,28 @@ public class TaskService {
 
     public void moveTaskForward(Long id){
         Task task = taskRepository.findById(id).get();
-        if(task.getStatus().equals(taskStatus.ToDo)){
-            task.setStatus(taskStatus.Doing);
+        if(task.getStatus()==0){
+            task.setStatus(1);
             taskRepository.save(task);
-        } else if(task.getStatus().equals(taskStatus.Doing)){
-            task.setStatus(taskStatus.Blocked);
+        } else if(task.getStatus()==1){
+            task.setStatus(2);
             taskRepository.save(task);
-        } else if (task.getStatus().equals(taskStatus.Blocked)){
-            task.setStatus(taskStatus.Done);
+        } else if (task.getStatus()==2){
+            task.setStatus(3);
             taskRepository.save(task);
         }
     }
 
     public void moveTaskBackward(Long id){
         Task task = taskRepository.findById(id).get();
-        if(task.getStatus().equals(taskStatus.Doing)){
-            task.setStatus(taskStatus.ToDo);
+        if(task.getStatus()==1){
+            task.setStatus(0);
             taskRepository.save(task);
-        } else if(task.getStatus().equals(taskStatus.Blocked)){
-            task.setStatus(taskStatus.Doing);
+        } else if(task.getStatus()==2){
+            task.setStatus(1);
             taskRepository.save(task);
-        } else if (task.getStatus().equals(taskStatus.Done)){
-            task.setStatus(taskStatus.Blocked);
+        } else if (task.getStatus()==3){
+            task.setStatus(2);
             taskRepository.save(task);
         }
     }
